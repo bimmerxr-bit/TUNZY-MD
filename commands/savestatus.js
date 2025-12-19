@@ -8,13 +8,13 @@ async function savestatusCommand(sock, chatId, message) {
         
         if (!quotedMessage) {
             return await sock.sendMessage(chatId, {
-                text: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *📱 SAVE STATUS*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n*Usage:* Reply to a status with `.savestatus`\n\n*How to:*\n1. Go to status\n2. Reply to it\n3. Type: .savestatus\n\n*Supported:* Images, Videos, Text, Audio",
+                text: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✪  *📱 SAVE STATUS*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n*Usage:* Reply to a status with `.savestatus`\n\n*How to:*\n1. Go to status\n2. Reply to it\n3. Type: .savestatus\n\n*Supported:* Images, Videos, Text, Audio",
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363404912601381@newsletter',
-                        newsletterName: 'ALASTOR-XMD',
+                        newsletterName: 'TUNZY-MD',
                         serverMessageId: -1
                     }
                 }
@@ -42,13 +42,13 @@ async function savestatusCommand(sock, chatId, message) {
 
         if (!mediaType) {
             return await sock.sendMessage(chatId, {
-                text: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *⚠️ UNSUPPORTED*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nThis type cannot be saved as status.",
+                text: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✪  *⚠️ UNSUPPORTED*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nThis type cannot be saved as status.",
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363404912601381@newsletter',
-                        newsletterName: 'ALASTOR-XMD',
+                        newsletterName: 'TUNZY-MD',
                         serverMessageId: -1
                     }
                 }
@@ -57,13 +57,13 @@ async function savestatusCommand(sock, chatId, message) {
 
         // Processing message
         await sock.sendMessage(chatId, {
-            text: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *⏬ DOWNLOADING*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nDownloading status...",
+            text: "Downloaing.....",
             contextInfo: {
                 forwardingScore: 1,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363404912601381@newsletter',
-                    newsletterName: 'ALASTOR-XMD',
+                    newsletterName: 'TUNZY-MD',
                     serverMessageId: -1
                 }
             }
@@ -121,13 +121,13 @@ async function savestatusCommand(sock, chatId, message) {
                 
                 // Send the file
                 const sendOptions = {
-                    caption: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *😈 STATUS STOLEN 😈*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n${caption}\n📁 *File:* ${path.basename(filePath)}\n📊 *Size:* ${(fileSize / 1024 / 1024).toFixed(2)} MB`,
+                    caption: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✪  * STATUS SAVED BY TUNZY😈*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n${caption}\n📁 *File:* ${path.basename(filePath)}\n📊 *Size:* ${(fileSize / 1024 / 1024).toFixed(2)} MB`,
                     contextInfo: {
                         forwardingScore: 1,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: '120363404912601381@newsletter',
-                            newsletterName: 'ALASTOR-XMD',
+                            newsletterName: 'TUNZY-MD',
                             serverMessageId: -1
                         }
                     }
@@ -149,13 +149,13 @@ async function savestatusCommand(sock, chatId, message) {
                     document: fileBuffer,
                     fileName: `status_${timestamp}.txt`,
                     mimetype: 'text/plain',
-                    caption: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 STATUS STOLEN 🤖*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n${caption}\n📁 *File:* ${path.basename(filePath)}\n📊 *Size:* ${(fileSize / 1024).toFixed(2)} KB`,
+                    caption: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✪  *🤖 STATUS SAVED BY TUNZY 🤖*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n${caption}\n📁 *File:* ${path.basename(filePath)}\n📊 *Size:* ${(fileSize / 1024).toFixed(2)} KB`,
                     contextInfo: {
                         forwardingScore: 1,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: '120363404912601381@newsletter',
-                            newsletterName: 'ALASTOR-XMD',
+                            newsletterName: 'TUNZY-MD',
                             serverMessageId: -1
                         }
                     }
@@ -187,13 +187,13 @@ async function savestatusCommand(sock, chatId, message) {
     } catch (error) {
         console.error('Save status error:', error);
         await sock.sendMessage(chatId, {
-            text: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *❌ ERROR*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nFailed to save status:\n${error.message || 'Unknown error'}`,
+            text: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✪  *❌ ERROR*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nFailed to save status:\n${error.message || 'Unknown error'}`,
             contextInfo: {
                 forwardingScore: 1,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363404912601381@newsletter',
-                    newsletterName: 'ALASTOR-XMD',
+                    newsletterName: 'TUNZY-MD',
                     serverMessageId: -1
                 }
             }
@@ -238,4 +238,4 @@ async function downloadMedia(message, filePath, sock) {
     }
 }
 
-module.exports = savestatusCommand;
+module.exports = saveCommand;
