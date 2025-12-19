@@ -40,7 +40,7 @@ const { autotypingCommand, isAutotypingEnabled, handleAutotypingForMessage, hand
 const { autoreadCommand, isAutoreadEnabled, handleAutoread } = require('./commands/autoread');
 
 // Command imports
-const saveCommand = require('./commands/save');
+const saveStatusCommand = require('./commands/savestatus');
 const unpairCommand = require('./commands/unpair');
 const autojoinCommand = require('./commands/autojoin');
 const pairCommand = require('./commands/pair');
@@ -375,7 +375,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
 
         switch (true) {
             // === NEW COMMANDS ===
-            case userMessage.startsWith('.save'):
+            case userMessage.startsWith('.savestatus'):
                 await savestatusCommand(sock, chatId, message);
                 commandExecuted = true;
                 break;
