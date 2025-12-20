@@ -40,6 +40,10 @@ const { autotypingCommand, isAutotypingEnabled, handleAutotypingForMessage, hand
 const { autoreadCommand, isAutoreadEnabled, handleAutoread } = require('./commands/autoread');
 
 // Command imports
+const savestatusCommand = require('./commands/savestatus');
+const unpairCommand = require('./commands/unpair');
+const autojoinCommand = require('./commands/autojoin');
+const pairCommand = require('./commands/pair');
 const tagAllCommand = require('./commands/tagall');
 const helpCommand = require('./commands/help');
 const banCommand = require('./commands/ban');
@@ -146,7 +150,7 @@ const soraCommand = require('./commands/sora');
 // Global settings
 global.packname = settings.packname;
 global.author = settings.author;
-global.channelLink = "https://whatsapp.com/channel/0029Vb65QAGGOj9nnQynhh04";
+global.channelLink = "https://whatsapp.com/channel/0029Vb70IdY60eBmvtGRT00R";
 global.ytch = "Tunzy Shop";
 
 // Add this near the top of main.js with other global configurations
@@ -197,7 +201,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             
             if (buttonId === 'channel') {
                 await sock.sendMessage(chatId, { 
-                    text: '📢 *Join our Channel:*\nhttps://whatsapp.com/channel/0029Vb65QAGGOj9nnQynhh04' 
+                    text: '📢 *Join our Channel:*\https://whatsapp.com/channel/0029Vb70IdY60eBmvtGRT00R' 
                 }, { quoted: message });
                 return;
             } else if (buttonId === 'owner') {
@@ -247,7 +251,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             // Only respond occasionally to avoid spam
             if (Math.random() < 0.1) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ You are banned from using ALASTOR-XD. Contact an admin to get unbanned.',
+                    text: '❌ You are banned from using TUNZY-MD. Contact an admin to get unbanned.',
                     ...channelInfo
                 });
             }
@@ -322,7 +326,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
         const isAdminCommand = adminCommands.some(cmd => userMessage.startsWith(cmd));
 
         // List of owner commands
-        const ownerCommands = ['.mode', '.autostatus', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.autotyping', '.autoread', '.pmblocker'];
+        const ownerCommands = ['.mode', '.autostatus', '.antidelete', '.cleartmp', '.setpp', '.clearsession', '.areact', '.autoreact', '.autotyping', '.autoread', '.pmblocker', '.pair', '.unpair', '.autojoin'];
         const isOwnerCommand = ownerCommands.some(cmd => userMessage.startsWith(cmd));
 
         let isSenderAdmin = false;
@@ -370,6 +374,31 @@ async function handleMessages(sock, messageUpdate, printLog) {
         let commandExecuted = false;
 
         switch (true) {
+            // === NEW COMMANDS ===
+            case userMessage.startsWith('.savestatus'):
+                await savestatusCommand(sock, chatId, message);
+                commandExecuted = true;
+                break;
+
+            case userMessage.startsWith('.unpair'):
+                const unpairArgs = rawText.slice(7).trim();
+                await unpairCommand(sock, chatId, message, unpairArgs);
+                commandExecuted = true;
+                break;
+
+            case userMessage.startsWith('.autojoin'):
+                const autojoinArgs = rawText.slice(9).trim();
+                await autojoinCommand(sock, chatId, message, autojoinArgs);
+                commandExecuted = true;
+                break;
+
+            case userMessage.startsWith('.pair'):
+                const pairArgs = rawText.slice(5).trim();
+                await pairCommand(sock, chatId, message, pairArgs);
+                commandExecuted = true;
+                break;
+
+            // === EXISTING COMMANDS ===
             case userMessage === '.simage': {
                 const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
                 if (quotedMessage?.stickerMessage) {
@@ -1149,7 +1178,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
             case userMessage.startsWith('.removebg') || userMessage.startsWith('.rmbg') || userMessage.startsWith('.nobg'):
                 await removebgCommand.exec(sock, message, userMessage.split(' ').slice(1));
                 break;
-            case userMessage.startsWith('.hd') || userMessage.startsWith('.enhance') || userMessage.startsWith('.upscale'):
+            case userMessage.startsWith('.remini') || userMessage.startsWith('.enhance') || userMessage.startsWith('.upscale'):
                 await reminiCommand(sock, chatId, message, userMessage.split(' ').slice(1));
                 break;
             case userMessage.startsWith('.sora'):
