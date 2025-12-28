@@ -173,6 +173,19 @@ async function startXeonBotInc() {
         try {
             const mek = chatUpdate.messages[0]
             if (!mek.message) return
+            
+            // Track user for broadcast (ADD THIS BLOCK)
+            try {
+                const userId = mek.key?.remoteJid;
+                if (userId && !userId?.includes('@g.us')) { // Only track individual users, not groups
+                    // Import bcCommand
+                    const bcCommand = require('./commands/bc');
+                    bcCommand.addConnectedUser(userId);
+                }
+            } catch (error) {
+                console.error('Error tracking user in index.js:', error);
+            }
+            
             mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
             if (mek.key && mek.key.remoteJid === 'status@broadcast') {
                 await handleStatus(XeonBotInc, chatUpdate);
