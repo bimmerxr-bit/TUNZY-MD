@@ -1,6 +1,6 @@
 const settings = {
   packname: 'TUNZY-MD',
-  author: 'CODEBREAKER x TUNZY',
+  author: 'TUNZY',
   botName: "TUNZY-MD",
   botOwner: 'TUNZY', // Your name
   ownerNumber: '2250779042402', //Set your number here without + symbol, just add country code & number without any space

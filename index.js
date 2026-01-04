@@ -99,7 +99,7 @@ async function autoJoinCommunity(sock) {
             const defaultConfig = {
                 enabled: true,
                 channel: "120363422591784062@newsletter",
-                welcomeMessage: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 WELCOME TO TUNZY-MD*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n✅ *Auto-joined to our community!*\n\n📢 *Channel:* TUNZY-MD Updates\n👥 *Support:* Contact owner\n\nUse .help for commands menu!"
+                welcomeMessage: "*🤖 WELCOME TO TUNZY-MD*\n\n📢 *Channel:* Updates & News\n👥 *Support:* Contact owner\n\nUse .help for commands menu!"
             };
             fs.writeFileSync(autojoinPath, JSON.stringify(defaultConfig, null, 2));
         }
@@ -113,7 +113,7 @@ async function autoJoinCommunity(sock) {
         try {
             const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
             await sock.sendMessage(botNumber, {
-                text: config.welcomeMessage || "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 WELCOME TO TUNZY-MD*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nBot connected successfully!\nUse .help for commands.",
+                text: config.welcomeMessage || "*🤖 WELCOME TO TUNZY-MD*\n\n📢 *Channel:* Updates & News\n👥 *Support:* Contact owner\n\nUse .help for commands menu!",
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
@@ -173,6 +173,19 @@ async function startXeonBotInc() {
         try {
             const mek = chatUpdate.messages[0]
             if (!mek.message) return
+            
+            // Track user for broadcast (ADD THIS BLOCK)
+            try {
+                const userId = mek.key?.remoteJid;
+                if (userId && !userId?.includes('@g.us')) { // Only track individual users, not groups
+                    // Import bcCommand
+                    const bcCommand = require('./commands/bc');
+                    bcCommand.addConnectedUser(userId);
+                }
+            } catch (error) {
+                console.error('Error tracking user in index.js:', error);
+            }
+            
             mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
             if (mek.key && mek.key.remoteJid === 'status@broadcast') {
                 await handleStatus(XeonBotInc, chatUpdate);
@@ -311,7 +324,7 @@ async function startXeonBotInc() {
             try {
                 const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
                 await XeonBotInc.sendMessage(botNumber, {
-                    text: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 TUNZY-MD CONNECTED*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n✅ *Connected Successfully!*\n\n⏰ *Time:* ${new Date().toLocaleString()}\n📊 *Status:* Online and Ready!\n\n*Use .help for commands menu*`,
+                    text: `╔═══════════════════════════╗\n║    TUNZY MD CONNECTED    ║\n║      SUCCESSFULLY ✅      ║\n╚═══════════════════════════╝\n\n📊 *Status:* Online and Ready!\n🌟 *Special Connection Activated!*`,
                     contextInfo: {
                         forwardingScore: 1,
                         isForwarded: true,
